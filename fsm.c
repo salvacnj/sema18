@@ -1,10 +1,11 @@
 /*
  * fsm.c
- *
+ * prueba dos
  */
 
 #include <stdlib.h>
 #include "fsm.h"
+sadfa;
 
 fsm_t*
 fsm_new (int state, fsm_trans_t* tt)
