@@ -10,8 +10,10 @@
 static void buttonON(fsm_t* this);
 static void buttonOFF(fsm_t* this);
 static int buttonPressed (fsm_t* this);
+static int timeFinish(fsm_t* this);
 
 static int button=0;
+uint32_t reference,now;
 
 /**
  * We defined the states
@@ -28,6 +30,7 @@ enum semp_state {
 static fsm_trans_t led[] = {
   {OFF, buttonPressed, ON , buttonON},
   {ON , buttonPressed, OFF, buttonOFF},
+  {ON , timeFinish, OFF, buttonOFF},
   {-1, NULL, -1, NULL },
 };
 
@@ -53,9 +56,22 @@ static void buttonOFF(fsm_t* this){
 	setButtonLow();
 }
 
+static int timeFinish(fsm_t* this){
+	int result=0;
+
+	now= HAL_GetTick();
+
+	if (now - timeLed >= reference)
+		result=1;
+
+	return result;
+}
+
 static void buttonON(fsm_t* this){
 	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_8,1U);
 	setButtonLow();
+
+	reference=HAL_GetTick();	// Start the time
 }
 void setButtonHigh(){
 	button=1;

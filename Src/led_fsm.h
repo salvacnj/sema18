@@ -1,5 +1,6 @@
 #include "fsm.h"
 
+#define timeLed		5000		/* In ms
 
 /***********************
  * Funciton declarations
