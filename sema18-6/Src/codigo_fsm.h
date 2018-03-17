@@ -1,4 +1,5 @@
 #include "fsm.h"
+#include "FreeRTOS.h"
 
 
 
@@ -6,7 +7,7 @@
  * PARAMETERS DEFINE
  */
 
-#define timeCorrect 1000
+#define timeCorrect 1000 /portTICK_RATE_MS
 #define digit1	1
 #define digit2	2
 #define digit3	3
